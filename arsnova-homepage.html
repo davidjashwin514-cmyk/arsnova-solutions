@@ -1,185 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ARSNOVA SOLUTIONS </title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f0f0f0;
-                margin: 0;
-                padding: 0;
-            }
-            .click-hint {
-                margin-top: 20px;
-            }
-            .container {
-                max-width: 800px;
-                margin: 50px auto;
-                padding: 20px;
-                background-color: #fff;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-            h1 {
-                color: #333;
-            }
-            p {
-                color: #666;
-                margin: 0 0 5px;
-            }
-            a {
-                color: #007BFF;
-                text-decoration: none;
-            }
-            a:hover {
-                text-decoration: underline;
-            }
-            .header {
-                text-align: left;
-                margin-bottom: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 20px;
-            }
-            .left-content {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .logo {
-                max-width: 160px;
-                display: block;
-                margin: 0 0 10px 0;
-            }
-            .profile-photo {
-                width: 140px;
-                height: 140px;
-                border-radius: 50%;
-                border: 3px solid #3498db;
-                object-fit: cover;
-                display: block;
-                margin: 0 auto 10px;
-            }
-            .profile-info {
-                text-align: center;
-                margin-top: 10px;
-            }
-            .profile-info strong {
-                display: block;
-                font-size: 1.2rem;
-                color: #333;
-                letter-spacing: 0.02em;
-            }
-            .profile-info span {
-                display: block;
-                font-size: 1rem;
-                color: #555;
-                margin-top: 4px;
-            }
-            .brand-text h1 {
-                margin: 0;
-            }
-            .brand-text h2 {
-                margin: 8px 0 0;
-                font-size: 1.1rem;
-                color: #555;
-            }
-            .details-section {
-                margin-top: 40px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arsnova Solutions | Entrust ID Card Printer Partner, Tamil Nadu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --navy: #0B2545;
+        --navy-deep: #071A33;
+        --teal: #0EA5A0;
+        --teal-dark: #0B8580;
+        --bg: #F5F7FA;
+        --card: #FFFFFF;
+        --text: #1F2937;
+        --muted: #66707D;
+        --border: #E4E8EE;
+        --radius: 14px;
+    }
 
-            }
-            .qr-text {
-                margin-top: 30px;
-            }
+    * { box-sizing: border-box; }
 
-            button {
-                background-color: #3498db;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 14px;
-            }
-            button:hover {
-                background-color: #2980b9;
-            }
+    body {
+        font-family: 'Inter', Arial, sans-serif;
+        background-color: var(--bg);
+        margin: 0;
+        padding: 40px 20px;
+        color: var(--text);
+    }
 
-            /* Mobile / small screen fixes */
-            @media (max-width: 600px) {
-                .container {
-                    margin: 20px 15px;
-                    padding: 15px;
-                }
-                .header {
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-                }
-                .left-content {
-                    align-items: center;
-                    text-align: center;
-                }
-                .logo {
-                    max-width: 110px;
-                    margin: 0 auto 10px;
-                }
-                .profile-photo {
-                    width: 100px;
-                    height: 100px;
-                }
-                h1 {
-                    font-size: 1.5rem;
-                }
-                h2 {
-                    font-size: 1rem;
-                }
-                p {
-                    font-size: 0.9rem;
-                }
-            }
-        </style>
+    .container {
+        max-width: 760px;
+        margin: 0 auto;
+        background: var(--card);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(11,37,69,0.06), 0 12px 32px rgba(11,37,69,0.08);
+    }
+
+    /* ---- Badge-style header ---- */
+    .badge-header {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+        padding: 36px 40px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        position: relative;
+    }
+
+    .badge-header::after {
+        content: "";
+        position: absolute;
+        left: 0; right: 0; bottom: -6px;
+        height: 6px;
+        background: repeating-linear-gradient(
+            90deg,
+            var(--teal) 0px, var(--teal) 18px,
+            transparent 18px, transparent 26px
+        );
+        opacity: 0.9;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .logo {
+        max-width: 130px;
+        height: auto;
+        display: block;
+        background: #fff;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+
+    .brand-text h1 {
+        font-family: 'Sora', sans-serif;
+        color: #fff;
+        font-size: 1.45rem;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: -0.01em;
+    }
+
+    .brand-text .eyebrow {
+        color: var(--teal);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin: 0 0 4px;
+    }
+
+    /* Badge-photo card, mimics a printed ID card */
+    .profile-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 10px 14px 12px;
+        text-align: center;
+        min-width: 128px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+
+    .profile-photo {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        border: 2px solid var(--teal);
+        object-fit: cover;
+        display: block;
+        margin: 0 auto 8px;
+    }
+
+    .profile-info strong {
+        display: block;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.78rem;
+        color: var(--navy);
+        letter-spacing: 0.01em;
+    }
+
+    .profile-info span {
+        display: block;
+        font-size: 0.66rem;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-top: 2px;
+    }
+
+    /* ---- Body content ---- */
+    .content {
+        padding: 40px 40px 36px;
+    }
+
+    .section-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--navy);
+        margin: 0 0 12px;
+    }
+
+    .lead {
+        color: var(--text);
+        line-height: 1.7;
+        margin: 0 0 10px;
+        font-size: 0.98rem;
+    }
+
+    .lead a {
+        color: var(--teal-dark);
+        font-weight: 600;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(14,165,160,0.35);
+    }
+    .lead a:hover { border-bottom-color: var(--teal-dark); }
+
+    .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 28px 0;
+    }
+
+    /* ---- Contact cards ---- */
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 18px;
+    }
+
+    .contact-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
+    }
+
+    .contact-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: rgba(14,165,160,0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .contact-icon svg { width: 18px; height: 18px; stroke: var(--teal-dark); }
+
+    .contact-text .label {
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 0 0 2px;
+    }
+
+    .contact-text a {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--navy);
+        text-decoration: none;
+    }
+    .contact-text a:hover { color: var(--teal-dark); }
+
+    /* ---- CTA ---- */
+    .cta-row {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .cta-hint {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0 0 12px;
+    }
+
+    button.cta {
+        background: var(--navy);
+        color: #fff;
+        border: none;
+        padding: 13px 34px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        transition: background 0.15s ease, transform 0.15s ease;
+    }
+    button.cta:hover {
+        background: var(--teal-dark);
+        transform: translateY(-1px);
+    }
+
+    /* ---- QR ---- */
+    .qr-block {
+        margin-top: 34px;
+        text-align: center;
+    }
+
+    .qr-hint {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0 0 14px;
+    }
+
+    .qr-frame {
+        display: inline-block;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+    }
+
+    .qr-frame img {
+        display: block;
+        width: 130px;
+        height: 130px;
+    }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 600px) {
+        body { padding: 20px 12px; }
+        .badge-header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 24px 26px;
+        }
+        .brand { flex-direction: column; }
+        .content { padding: 30px 22px; }
+        .contact-grid { grid-template-columns: 1fr; }
+    }
+</style>
 </head>
 <body>
     <div class="container">
-            <div class="header">
-                <div class="left-content">
-                    <img src="logo.png" alt="Arsnova Solutions logo" class="logo">
-                    <div class="brand-text">
-                        <h1>Arsnova Solutions</h1>
-                        <h2>About Arsnova Solutions</h2>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <img src="david.png" alt="David Jayasingh" class="profile-photo">
-                    <div class="profile-info">
-                        <strong>DAVID JAYASINGH</strong>
-                        <span>DIRECTOR / SALES</span>
-                    </div>
-                </div>
-            </div>
-            <p>Arsnova Solutions represents as partner in Tamilnadu for the leading</p>
-            <p>ID card Printer brand Entrust.</p>
-            <p>Entrust offers on demand secure employee ID cards, membership Cards,</p>
-            <p>Students IDs, Patient IDs, Government issued ID cards with enhanced design,</p>
-            <p>management, efficiency and easy operation</p>
-            <p>For More Information, please visit our <a href="https://arsnova.in">About Us</a> page.</p>
-            <div class="details-section">
-                <p>For More Details Please Call The Below Detail Number</p>
-                <p>Mail to the Given Email Address</p>
-                <p>Contact Number: <a href="tel:+918015052611">+91 8015052611</a></p>
-                <p>Email: <a href="mailto:jashwin@arsnova.in">jashwin@arsnova.in</a></p>
-            </div>
-            <p class="click-hint">Or Click The button below to learn more:</p>
-            <button onclick="window.location.href='https://arsnova.in'">Click Me</button>
-            <p class="qr-text">Or Scan the QR code below to visit our website:</p>
 
-            <div class="qr-selection">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://arsnova.in" alt="QR Code to Arsnova Solutions website">
+        <div class="badge-header">
+            <div class="brand">
+                <img src="logo.png" alt="Arsnova Solutions logo" class="logo">
+                <div class="brand-text">
+                    <p class="eyebrow">Entrust Authorised Partner &mdash; Tamil Nadu</p>
+                    <h1>Arsnova Solutions</h1>
+                </div>
             </div>
+            <div class="profile-card">
+                <img src="david.png" alt="David Jayasingh" class="profile-photo">
+                <div class="profile-info">
+                    <strong>David Jayasingh</strong>
+                    <span>Director / Sales</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 class="section-title">About Arsnova Solutions</h2>
+            <p class="lead">Arsnova Solutions represents as partner in Tamil Nadu for the leading ID card printer brand Entrust. Entrust offers on-demand secure employee ID cards, membership cards, student IDs, patient IDs, and government-issued ID cards with enhanced design, management, efficiency, and easy operation.</p>
+            <p class="lead">For more information, please visit our <a href="https://arsnova.in">About Us</a> page.</p>
+
+            <div class="divider"></div>
+
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <p class="label">Call us</p>
+                        <a href="tel:+918015052611">+91 80150 52611</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <path d="m22 6-10 7L2 6"/>
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <p class="label">Email us</p>
+                        <a href="mailto:jashwin@arsnova.in">jashwin@arsnova.in</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-row">
+                <p class="cta-hint">Explore our full range of ID card printers and solutions</p>
+                <button class="cta" onclick="window.location.href='https://arsnova.in'">Visit Our Website</button>
+            </div>
+
+            <div class="qr-block">
+                <p class="qr-hint">Or scan the QR code to visit our website</p>
+                <div class="qr-frame">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://arsnova.in" alt="QR Code to Arsnova Solutions website">
+                </div>
+            </div>
+        </div>
 
     </div>
 </body>
