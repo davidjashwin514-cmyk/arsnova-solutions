@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ARSNOVA SOLUTIONS </title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 0;
+            }
+            .click-hint {
+                margin-top: 20px;
+            }
+            .container {
+                max-width: 800px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color: #333;
+            }
+            p {
+                color: #666;
+                margin: 0 0 5px;
+            }
+            a {
+                color: #007BFF;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .header {
+                text-align: left;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+            }
+            .left-content {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .logo {
+                max-width: 160px;
+                display: block;
+                margin: 0 0 10px 0;
+            }
+            .profile-photo {
+                width: 140px;
+                height: 140px;
+                border-radius: 50%;
+                border: 3px solid #3498db;
+                object-fit: cover;
+                display: block;
+                margin: 0 auto 10px;
+            }
+            .profile-info {
+                text-align: center;
+                margin-top: 10px;
+            }
+            .profile-info strong {
+                display: block;
+                font-size: 1.2rem;
+                color: #333;
+                letter-spacing: 0.02em;
+            }
+            .profile-info span {
+                display: block;
+                font-size: 1rem;
+                color: #555;
+                margin-top: 4px;
+            }
+            .brand-text h1 {
+                margin: 0;
+            }
+            .brand-text h2 {
+                margin: 8px 0 0;
+                font-size: 1.1rem;
+                color: #555;
+            }
+            .details-section {
+                margin-top: 40px;
+
+            }
+            .qr-text {
+                margin-top: 30px;
+            }
+
+            button {
+                background-color: #3498db;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            button:hover {
+                background-color: #2980b9;
+            }
+
+            /* Mobile / small screen fixes */
+            @media (max-width: 600px) {
+                .container {
+                    margin: 20px 15px;
+                    padding: 15px;
+                }
+                .header {
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                }
+                .left-content {
+                    align-items: center;
+                    text-align: center;
+                }
+                .logo {
+                    max-width: 110px;
+                    margin: 0 auto 10px;
+                }
+                .profile-photo {
+                    width: 100px;
+                    height: 100px;
+                }
+                h1 {
+                    font-size: 1.5rem;
+                }
+                h2 {
+                    font-size: 1rem;
+                }
+                p {
+                    font-size: 0.9rem;
+                }
+            }
+        </style>
+</head>
+<body>
+    <div class="container">
+            <div class="header">
+                <div class="left-content">
+                    <img src="logo.png" alt="Arsnova Solutions logo" class="logo">
+                    <div class="brand-text">
+                        <h1>Arsnova Solutions</h1>
+                        <h2>About Arsnova Solutions</h2>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <img src="david.png" alt="David Jayasingh" class="profile-photo">
+                    <div class="profile-info">
+                        <strong>DAVID JAYASINGH</strong>
+                        <span>DIRECTOR / SALES</span>
+                    </div>
+                </div>
+            </div>
+            <p>Arsnova Solutions represents as partner in Tamilnadu for the leading</p>
+            <p>ID card Printer brand Entrust.</p>
+            <p>Entrust offers on demand secure employee ID cards, membership Cards,</p>
+            <p>Students IDs, Patient IDs, Government issued ID cards with enhanced design,</p>
+            <p>management, efficiency and easy operation</p>
+            <p>For More Information, please visit our <a href="https://arsnova.in">About Us</a> page.</p>
+            <div class="details-section">
+                <p>For More Details Please Call The Below Detail Number</p>
+                <p>Mail to the Given Email Address</p>
+                <p>Contact Number: <a href="tel:+918015052611">+91 8015052611</a></p>
+                <p>Email: <a href="mailto:jashwin@arsnova.in">jashwin@arsnova.in</a></p>
+            </div>
+            <p class="click-hint">Or Click The button below to learn more:</p>
+            <button onclick="window.location.href='https://arsnova.in'">Click Me</button>
+            <p class="qr-text">Or Scan the QR code below to visit our website:</p>
+
+            <div class="qr-selection">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://arsnova.in" alt="QR Code to Arsnova Solutions website">
+            </div>
+
+    </div>
+</body>
+</html>
