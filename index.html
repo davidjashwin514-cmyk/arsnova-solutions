@@ -37,10 +37,8 @@
         width: 100%; height: 100%;
         background: var(--navy);
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 22px;
         z-index: 9999;
         transition: opacity 0.5s ease, visibility 0.5s ease;
     }
@@ -48,13 +46,6 @@
     #loader.hidden {
         opacity: 0;
         visibility: hidden;
-    }
-
-    .loader-logo {
-        max-width: 120px;
-        background: #fff;
-        padding: 8px 12px;
-        border-radius: 8px;
     }
 
     .loader-spinner {
@@ -205,6 +196,37 @@
         margin: 28px 0;
     }
 
+    /* ---- Product gallery ---- */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 18px;
+    }
+
+    .product-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px;
+        text-align: center;
+    }
+
+    .product-img {
+        width: 100%;
+        height: 120px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--navy);
+        margin: 0;
+    }
+
+    /* ---- Contact cards ---- */
     .contact-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -316,6 +338,7 @@
         .brand { flex-direction: column; }
         .content { padding: 30px 22px; }
         .contact-grid { grid-template-columns: 1fr; }
+        .product-grid { grid-template-columns: 1fr 1fr; }
     }
 </style>
 </head>
@@ -348,6 +371,24 @@
             <h2 class="section-title">About Arsnova Solutions</h2>
             <p class="lead">Arsnova Solutions represents as partner in Tamil Nadu for the leading ID card printer brand Entrust. Entrust offers on-demand secure employee ID cards, membership cards, student IDs, patient IDs, and government-issued ID cards with enhanced design, management, efficiency, and easy operation.</p>
             <p class="lead">For more information, please visit our <a href="https://arsnova.in">About Us</a> page.</p>
+
+            <div class="divider"></div>
+
+            <h2 class="section-title">Our Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="product1.jpg" alt="Product name" class="product-img">
+                    <p class="product-name">Product Name 1</p>
+                </div>
+                <div class="product-card">
+                    <img src="product2.jpg" alt="Product name" class="product-img">
+                    <p class="product-name">Product Name 2</p>
+                </div>
+                <div class="product-card">
+                    <img src="product3.jpg" alt="Product name" class="product-img">
+                    <p class="product-name">Product Name 3</p>
+                </div>
+            </div>
 
             <div class="divider"></div>
 
