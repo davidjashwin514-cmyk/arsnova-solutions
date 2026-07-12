@@ -557,6 +557,12 @@
         align-items: center;
         justify-content: center;
         padding: 4px;
+        cursor: pointer;
+    }
+
+    .pay-app-icon {
+        border: 1px solid var(--border);
+        cursor: pointer;
     }
 
     .pay-app-icon img {
@@ -795,12 +801,12 @@
 
                         <div class="pay-apps-col">
                             <div class="pay-apps">
-                                <a href="tez://upi/pay?pa=QR916384852611-0017@unionbankofindia&pn=ArsnovaSolutions&cu=INR" class="pay-app-icon">
+                                <button type="button" class="pay-app-icon" onclick="openPaymentApp('gpay')">
                                     <img src="gpay-icon.png" alt="Google Pay">
-                                </a>
-                                <a href="phonepe://pay?pa=QR916384852611-0017@unionbankofindia&pn=ArsnovaSolutions&cu=INR" class="pay-app-icon">
+                                </button>
+                                <button type="button" class="pay-app-icon" onclick="openPaymentApp('phonepe')">
                                     <img src="phonepe-icon.png" alt="PhonePe">
-                                </a>
+                                </button>
                             </div>
                             <p class="click-to-pay">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
@@ -929,6 +935,33 @@
             const phoneNumber = '919487152683';
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
+        }
+
+        function openPaymentApp(app) {
+            const upiId = 'QR916384852611-0017@unionbankofindia';
+            const name = 'ArsnovaSolutions';
+            let appLink, playStoreLink, appName;
+
+            if (app === 'gpay') {
+                appLink = `tez://upi/pay?pa=${upiId}&pn=${name}&cu=INR`;
+                playStoreLink = 'https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user';
+                appName = 'Google Pay';
+            } else {
+                appLink = `phonepe://pay?pa=${upiId}&pn=${name}&cu=INR`;
+                playStoreLink = 'https://play.google.com/store/apps/details?id=com.phonepe.app';
+                appName = 'PhonePe';
+            }
+
+            const now = Date.now();
+            window.location.href = appLink;
+
+            setTimeout(function () {
+                if (Date.now() - now < 2000) {
+                    if (confirm(`${appName} is not installed. Would you like to install it now?`)) {
+                        window.location.href = playStoreLink;
+                    }
+                }
+            }, 1500);
         }
 
         const slider = document.getElementById('productSlider');
