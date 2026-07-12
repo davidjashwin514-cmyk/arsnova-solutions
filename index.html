@@ -257,6 +257,27 @@
         display: inline-block;
     }
 
+    .phonebook-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--teal);
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 22px;
+        border-radius: 30px;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        transition: background 0.15s ease;
+    }
+
+    .phonebook-btn:hover {
+        background: var(--teal-dark);
+    }
+
     .cta-hint {
         font-size: 0.85rem;
         color: var(--muted);
@@ -350,6 +371,17 @@
             <h2 class="section-title">About Arsnova Solutions</h2>
             <p class="lead">Arsnova Solutions represents as partner in Tamil Nadu for the leading ID card printer brand Entrust. Entrust offers on-demand secure employee ID cards, membership cards, student IDs, patient IDs, and government-issued ID cards with enhanced design, management, efficiency, and easy operation.</p>
             <p class="lead">For more information, please visit our <a href="https://arsnova.in">About Us</a> page.</p>
+
+            <div class="cta-row">
+                <a href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3ADavid%20Jayasingh%0AORG%3AArsnova%20Solutions%0ATITLE%3ADirector%20%2F%20Sales%0ATEL%3A%2B919487152683%0AEMAIL%3Adavid%40arsnova.in%0AEND%3AVCARD" download="David_Jayasingh.vcf" class="phonebook-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                        <path d="M19 8v6M22 11h-6"/>
+                    </svg>
+                    ADD TO PHONEBOOK
+                </a>
+            </div>
 
             <div class="divider"></div>
 
