@@ -527,6 +527,42 @@
         font-weight: 600;
     }
 
+    .pay-apps {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 16px;
+    }
+
+    .pay-app-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+    }
+
+    .pay-app-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .click-to-pay {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
     @media (max-width: 600px) {
         body { padding: 20px 12px; }
         .badge-header {
@@ -664,8 +700,23 @@
                     <p class="account-title">UPI Payment</p>
                     <div class="account-row"><span>UPI ID</span><strong>QR916384852611-0017@unionbankofindia</strong></div>
                     <div class="qr-frame" style="margin-top:12px;">
-                        <img src="upi-qr.png" alt="UPI QR Code" style="width:130x; height:130px;">
+                        <img src="upi-qr.png" alt="UPI QR Code" style="width:130px; height:130px;">
                     </div>
+
+                    <div class="pay-apps">
+                        <a href="upi://pay?pa=QR916384852611-0017@unionbankofindia&pn=ArsnovaSolutions" class="pay-app-icon">
+                            <img src="gpay-icon.png" alt="Google Pay">
+                        </a>
+                        <a href="upi://pay?pa=QR916384852611-0017@unionbankofindia&pn=ArsnovaSolutions" class="pay-app-icon">
+                            <img src="phonepe-icon.png" alt="PhonePe">
+                        </a>
+                    </div>
+                    <p class="click-to-pay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                            <path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/>
+                        </svg>
+                        Click to Pay
+                    </p>
                 </div>
             </div>
 
