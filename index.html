@@ -314,6 +314,35 @@
         margin: 0 0 12px;
     }
 
+    .hours-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 30px;
+        margin-top: 16px;
+    }
+
+    .hours-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.92rem;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .hours-row strong {
+        color: var(--navy);
+        font-weight: 700;
+    }
+
+    .hours-row span {
+        color: var(--text);
+        font-weight: 600;
+    }
+
+    .hours-row .closed {
+        color: #E53E3E;
+    }
+
     button.cta {
         background: var(--navy);
         color: #fff;
@@ -368,6 +397,7 @@
         .brand { flex-direction: column; }
         .content { padding: 30px 22px; }
         .contact-grid { grid-template-columns: 1fr; }
+        .hours-grid { grid-template-columns: 1fr; }
     }
 </style>
 </head>
@@ -459,6 +489,19 @@
                         <p class="label">Visit Us</p>
                         <a href="https://maps.app.goo.gl/LhURrfRkZ9L5cGsUA?g_st=awb" target="_blank">14, Nachimuthu Layout, 1st Cross KK Pudur, Saibaba Colony, Coimbatore, Tamil Nadu 641038</a>
                     </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <h2 class="section-title" style="text-align:center;">Business Hours</h2>
+                <div class="hours-grid">
+                    <div class="hours-row"><strong>Monday</strong><span>09:30 – 05:30</span></div>
+                    <div class="hours-row"><strong>Tuesday</strong><span>09:30 – 05:30</span></div>
+                    <div class="hours-row"><strong>Wednesday</strong><span>09:30 – 05:30</span></div>
+                    <div class="hours-row"><strong>Thursday</strong><span>09:30 – 05:30</span></div>
+                    <div class="hours-row"><strong>Friday</strong><span>09:30 – 05:30</span></div>
+                    <div class="hours-row"><strong>Saturday</strong><span>09:30 – 05:30</span></div>
+                    <div class="hours-row"><strong>Sunday</strong><span class="closed">Closed</span></div>
                 </div>
             </div>
 
