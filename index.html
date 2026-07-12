@@ -952,16 +952,29 @@
                 appName = 'PhonePe';
             }
 
-            const now = Date.now();
+            let appOpened = false;
+
+            function handleVisibilityChange() {
+                if (document.hidden) {
+                    appOpened = true;
+                }
+            }
+
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+            window.addEventListener('blur', handleVisibilityChange);
+
             window.location.href = appLink;
 
             setTimeout(function () {
-                if (Date.now() - now < 2000) {
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+                window.removeEventListener('blur', handleVisibilityChange);
+
+                if (!appOpened) {
                     if (confirm(`${appName} is not installed. Would you like to install it now?`)) {
                         window.location.href = playStoreLink;
                     }
                 }
-            }, 1500);
+            }, 2000);
         }
 
         const slider = document.getElementById('productSlider');
