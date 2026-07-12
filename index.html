@@ -576,6 +576,67 @@
         margin-top: 8px;
     }
 
+    .product-slider-wrap {
+        margin-top: 18px;
+    }
+
+    .product-slider {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .product-slider::-webkit-scrollbar {
+        display: none;
+    }
+
+    .product-slider .product-card {
+        flex: 0 0 70%;
+        scroll-snap-align: center;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px;
+        text-align: center;
+    }
+
+    .product-img {
+        width: 100%;
+        height: 160px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--navy);
+        margin: 0;
+    }
+
+    .slider-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 10px;
+    }
+
+    .slider-dots span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--border);
+        transition: background 0.2s ease;
+    }
+
+    .slider-dots span.active {
+        background: var(--teal);
+    }
+
     @media (max-width: 600px) {
         body { padding: 20px 12px; }
         .badge-header {
@@ -588,6 +649,12 @@
         .content { padding: 30px 22px; }
         .contact-grid { grid-template-columns: 1fr; }
         .hours-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 601px) {
+        .product-slider .product-card {
+            flex: 0 0 260px;
+        }
     }
 </style>
 </head>
@@ -760,6 +827,28 @@
 
             <div class="divider"></div>
 
+            <h2 class="section-title" style="text-align:center;">Our Products</h2>
+
+            <div class="product-slider-wrap">
+                <div class="product-slider" id="productSlider">
+                    <div class="product-card">
+                        <img src="product1.jpg" alt="Product name" class="product-img">
+                        <p class="product-name">Product Name 1</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="product2.jpg" alt="Product name" class="product-img">
+                        <p class="product-name">Product Name 2</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="product3.jpg" alt="Product name" class="product-img">
+                        <p class="product-name">Product Name 3</p>
+                    </div>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+
+            <div class="divider"></div>
+
             <h2 class="section-title" style="text-align:center;">Enquiry Form</h2>
 
             <div class="enquiry-box">
@@ -829,6 +918,23 @@
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
         }
+
+        const slider = document.getElementById('productSlider');
+        const dotsContainer = document.getElementById('sliderDots');
+        const cards = slider.querySelectorAll('.product-card');
+
+        cards.forEach((_, i) => {
+            const dot = document.createElement('span');
+            if (i === 0) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll('span');
+
+        slider.addEventListener('scroll', () => {
+            const index = Math.round(slider.scrollLeft / cards[0].offsetWidth);
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        });
 
         window.addEventListener('load', function () {
             document.getElementById('loader').classList.add('hidden');
