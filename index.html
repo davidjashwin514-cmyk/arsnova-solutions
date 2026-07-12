@@ -409,6 +409,35 @@
         background: var(--teal-dark);
     }
 
+    .enquiry-box {
+        max-width: 420px;
+        margin: 18px auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .enquiry-input {
+        width: 100%;
+        padding: 13px 16px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #fff;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.92rem;
+        color: var(--text);
+    }
+
+    .enquiry-input:focus {
+        outline: none;
+        border-color: var(--teal);
+    }
+
+    .enquiry-textarea {
+        resize: vertical;
+        font-family: 'Inter', sans-serif;
+    }
+
     button.cta {
         background: var(--navy);
         color: #fff;
@@ -556,19 +585,19 @@
                         <a href="https://maps.app.goo.gl/LhURrfRkZ9L5cGsUA?g_st=awb" target="_blank">14, Nachimuthu Layout, 1st Cross KK Pudur, Saibaba Colony, Coimbatore, Tamil Nadu 641038</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="divider"></div>
+            <div class="divider"></div>
 
-                <h2 class="section-title" style="text-align:center;">Business Hours</h2>
-                <div class="hours-grid">
-                    <div class="hours-row"><strong>Monday</strong><span>09:30 – 05:30</span></div>
-                    <div class="hours-row"><strong>Tuesday</strong><span>09:30 – 05:30</span></div>
-                    <div class="hours-row"><strong>Wednesday</strong><span>09:30 – 05:30</span></div>
-                    <div class="hours-row"><strong>Thursday</strong><span>09:30 – 05:30</span></div>
-                    <div class="hours-row"><strong>Friday</strong><span>09:30 – 05:30</span></div>
-                    <div class="hours-row"><strong>Saturday</strong><span>09:30 – 05:30</span></div>
-                    <div class="hours-row"><strong>Sunday</strong><span class="closed">Closed</span></div>
-                </div>
+            <h2 class="section-title" style="text-align:center;">Business Hours</h2>
+            <div class="hours-grid">
+                <div class="hours-row"><strong>Monday</strong><span>09:30 – 05:30</span></div>
+                <div class="hours-row"><strong>Tuesday</strong><span>09:30 – 05:30</span></div>
+                <div class="hours-row"><strong>Wednesday</strong><span>09:30 – 05:30</span></div>
+                <div class="hours-row"><strong>Thursday</strong><span>09:30 – 05:30</span></div>
+                <div class="hours-row"><strong>Friday</strong><span>09:30 – 05:30</span></div>
+                <div class="hours-row"><strong>Saturday</strong><span>09:30 – 05:30</span></div>
+                <div class="hours-row"><strong>Sunday</strong><span class="closed">Closed</span></div>
             </div>
 
             <div class="divider"></div>
@@ -590,6 +619,19 @@
                     </svg>
                     MAKE AN APPOINTMENT
                 </button>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2 class="section-title" style="text-align:center;">Enquiry Form</h2>
+
+            <div class="enquiry-box">
+                <input type="text" id="enqName" class="enquiry-input" placeholder="Name">
+                <input type="email" id="enqEmail" class="enquiry-input" placeholder="Email Address">
+                <input type="tel" id="enqPhone" class="enquiry-input" placeholder="Phone Number">
+                <textarea id="enqMessage" class="enquiry-input enquiry-textarea" placeholder="Message" rows="3"></textarea>
+
+                <button type="button" class="appt-submit" onclick="sendEnquiry()">SEND ENQUIRY</button>
             </div>
 
             <div class="cta-row">
@@ -629,6 +671,23 @@
                 return;
             }
             const message = `Hi, I would like to book an appointment on ${date} between ${selectedSlot}.`;
+            const phoneNumber = '919487152683';
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function sendEnquiry() {
+            const name = document.getElementById('enqName').value.trim();
+            const email = document.getElementById('enqEmail').value.trim();
+            const phone = document.getElementById('enqPhone').value.trim();
+            const msg = document.getElementById('enqMessage').value.trim();
+
+            if (!name || !phone) {
+                alert('Please enter at least your name and phone number.');
+                return;
+            }
+
+            const message = `Enquiry from website:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${msg}`;
             const phoneNumber = '919487152683';
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
