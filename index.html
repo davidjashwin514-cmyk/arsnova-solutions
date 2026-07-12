@@ -250,6 +250,10 @@
     .cta-row {
         margin-top: 30px;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
     }
 
     .cta-link {
@@ -275,6 +279,27 @@
     }
 
     .phonebook-btn:hover {
+        background: var(--teal-dark);
+    }
+
+    .call-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--navy);
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 22px;
+        border-radius: 30px;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        transition: background 0.15s ease;
+    }
+
+    .call-btn:hover {
         background: var(--teal-dark);
     }
 
@@ -380,6 +405,13 @@
                         <path d="M19 8v6M22 11h-6"/>
                     </svg>
                     ADD TO PHONEBOOK
+                </a>
+
+                <a href="tel:+919487152683" class="call-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    CALL NOW
                 </a>
             </div>
 
