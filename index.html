@@ -164,15 +164,26 @@
         border: 1px solid rgba(14,165,160,0.16);
     }
 
+    /* Gradient border container: keeps inner area white */
     .profile-photo {
         width: 200px;
         height: 200px;
         border-radius: 50%;
-        border: 3px solid hsl(0, 91%, 26%);
-        object-fit: cover;
+        padding: 3.5px; /* reduced thickness of the colored border */
         display: block;
         margin: 0 auto 10px;
         box-shadow: 0 18px 45px rgba(11,37,69,0.16);
+        background: conic-gradient(from 180deg at 50% 50%, #0EA5A0, #5B21B6, #D4AF7F, #0EA5A0);
+    }
+
+    .profile-photo-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        display: block;
+        object-fit: cover;
+        background: #fff; /* white interior */
+        box-shadow: 0 6px 18px rgba(11,37,69,0.08) inset;
     }
 
     .profile-info strong {
@@ -752,7 +763,9 @@
                 </div>
             </div>
             <div class="profile-card">
-                <img src="david.png" alt="David Jayasingh" class="profile-photo">
+                <div class="profile-photo">
+                    <img src="david.png" alt="David Jayasingh" class="profile-photo-img">
+                </div>
                 <div class="profile-info">
                     <strong>David Jayasingh</strong>
                     <span>Director / Sales</span>
