@@ -7,383 +7,342 @@
 <link rel="icon" type="image/png" href="logo1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
     :root {
-        --ink: #0A0D12;
-        --ink-soft: #161B24;
-        --ink-line: rgba(217,188,133,0.22);
-        --paper: #F5F6F8;
+        --navy: #0B2545;
+        --navy-deep: #071A33;
+        --teal: #0EA5A0;
+        --teal-dark: #0B8580;
+        --bg: #F5F7FA;
         --card: #FFFFFF;
-        --gold: #B08D57;
-        --gold-bright: #D9BC85;
-        --teal: #14A69C;
-        --text: #1C2027;
-        --muted: #6B7280;
-        --line: #E2E5EA;
-        --radius: 12px;
+        --text: #1F2937;
+        --muted: #66707D;
+        --border: #E4E8EE;
+        --radius: 14px;
     }
 
     * { box-sizing: border-box; }
 
-    @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-    }
-
     body {
         font-family: 'Inter', Arial, sans-serif;
-        background: var(--ink);
+        background-image: url('bg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
         margin: 0;
-        padding: 48px 18px;
+        padding: 40px 20px;
         color: var(--text);
     }
 
-    /* ---------- Loader ---------- */
     #loader {
         position: fixed;
         top: 0; left: 0;
         width: 100%; height: 100%;
-        background: var(--ink);
+        background: var(--navy);
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 9999;
         transition: opacity 0.5s ease, visibility 0.5s ease;
     }
-    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    #loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
     .loader-spinner {
-        width: 56px; height: 56px;
-        border: 3px solid rgba(217,188,133,0.18);
-        border-top-color: var(--gold-bright);
+        width: 70px;
+        height: 70px;
+        border: 6px solid rgba(255,255,255,0.25);
+        border-top-color: var(--teal);
         border-radius: 50%;
-        animation: spin 0.9s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ---------- Guilloché texture ---------- */
-    .guilloche {
-        position: absolute;
-        inset: 0;
-        opacity: 0.5;
-        pointer-events: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23D9BC85' stroke-width='0.6' opacity='0.35'%3E%3Ccircle cx='0' cy='0' r='30'/%3E%3Ccircle cx='0' cy='0' r='46'/%3E%3Ccircle cx='0' cy='0' r='62'/%3E%3Ccircle cx='220' cy='0' r='30'/%3E%3Ccircle cx='220' cy='0' r='46'/%3E%3Ccircle cx='220' cy='0' r='62'/%3E%3Ccircle cx='0' cy='220' r='30'/%3E%3Ccircle cx='0' cy='220' r='46'/%3E%3Ccircle cx='0' cy='220' r='62'/%3E%3Ccircle cx='220' cy='220' r='30'/%3E%3Ccircle cx='220' cy='220' r='46'/%3E%3Ccircle cx='220' cy='220' r='62'/%3E%3Ccircle cx='110' cy='110' r='18'/%3E%3Ccircle cx='110' cy='110' r='34'/%3E%3Ccircle cx='110' cy='110' r='50'/%3E%3Ccircle cx='110' cy='110' r='66'/%3E%3Ccircle cx='110' cy='110' r='82'/%3E%3C/g%3E%3C/svg%3E");
-        background-size: 220px 220px;
+        animation: spin 0.8s linear infinite;
     }
 
-    /* ---------- Shell ---------- */
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
     .container {
-        position: relative;
         max-width: 760px;
         margin: 0 auto;
-        background: var(--paper);
+        background: rgba(255, 255, 255, 0.7);
         border-radius: var(--radius);
         overflow: hidden;
-        box-shadow: 0 40px 90px rgba(0,0,0,0.45), 0 0 0 1px rgba(217,188,133,0.15);
+        box-shadow: 0 1px 3px rgba(11,37,69,0.06), 0 12px 32px rgba(11,37,69,0.08);
     }
 
-    /* ---------- Hologram strip (signature element) ---------- */
-    .holo-strip {
-        height: 8px;
-        width: 100%;
-        background: linear-gradient(90deg,
-            #14A69C 0%, #B08D57 16%, #E7CE9C 32%, #6FB6C9 48%,
-            #B08D57 64%, #14A69C 80%, #E7CE9C 100%);
-        background-size: 260% 100%;
-        animation: sheen 9s ease-in-out infinite;
-    }
-    @keyframes sheen {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* ---------- Header / badge ---------- */
     .badge-header {
-        position: relative;
-        background: radial-gradient(120% 140% at 8% 0%, #1B2230 0%, var(--ink) 55%, #05070A 100%);
-        padding: 38px 40px 32px;
-        overflow: hidden;
-        color: #fff;
-    }
-
-    .header-top {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+        padding: 36px 40px 28px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 20px;
         position: relative;
-        z-index: 1;
     }
 
-    .brand { display: flex; align-items: center; gap: 16px; }
+    .badge-header::after {
+        content: "";
+        position: absolute;
+        left: 0; right: 0; bottom: -6px;
+        height: 6px;
+        background: repeating-linear-gradient(
+            90deg,
+            var(--teal) 0px, var(--teal) 18px,
+            transparent 18px, transparent 26px
+        );
+        opacity: 0.9;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
 
     .logo {
-        max-width: 138px;
+        max-width: 160px;
         height: auto;
         display: block;
         background: #fff;
         padding: 6px 10px;
-        border-radius: 6px;
-    }
-
-    .chip {
-        width: 30px; height: 22px;
-        border-radius: 4px;
-        background: linear-gradient(135deg, var(--gold-bright), var(--gold) 60%, #8a6c3f);
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        gap: 1.5px;
-        padding: 3px;
-        flex-shrink: 0;
-    }
-    .chip span { background: rgba(10,13,18,0.35); border-radius: 1px; }
-
-    .brand-text .eyebrow {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--gold-bright);
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.68rem;
-        font-weight: 500;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        margin: 0 0 6px;
+        border-radius: 8px;
     }
 
     .brand-text h1 {
-        font-family: 'Fraunces', serif;
-        font-size: 1.55rem;
-        font-weight: 600;
+        font-family: 'Sora', sans-serif;
+        color: #fff;
+        font-size: 1.45rem;
+        font-weight: 700;
         margin: 0;
-        letter-spacing: 0.01em;
+        letter-spacing: -0.01em;
+    }
+
+    .brand-text .eyebrow {
+        color: var(--teal);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin: 0 0 4px;
     }
 
     .profile-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px 22px 18px;
         text-align: center;
-        min-width: 118px;
-        position: relative;
-        z-index: 1;
+        min-width: 128px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
     }
 
     .profile-photo {
-        width: 108px;
-        height: 108px;
+        width: 200px;
+        height: 200px;
         border-radius: 50%;
-        border: 2px solid var(--gold-bright);
+        border: 2px solid var(--teal);
         object-fit: cover;
         display: block;
-        margin: 0 auto 10px;
-        box-shadow: 0 0 0 4px rgba(217,188,133,0.12);
+        margin: 0 auto 8px;
     }
 
     .profile-info strong {
         display: block;
-        font-family: 'Fraunces', serif;
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: #fff;
+        font-family: 'Sora', sans-serif;
+        font-size: 1.6rem;
+        color: var(--navy);
         letter-spacing: 0.01em;
     }
 
     .profile-info span {
         display: block;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.66rem;
-        color: var(--gold-bright);
-        letter-spacing: 0.1em;
+        font-size: 0.80rem;
+        color: var(--muted);
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        margin-top: 4px;
+        margin-top: 2px;
     }
 
-    /* ---------- Microtext rule ---------- */
-    .microtext {
-        overflow: hidden;
-        white-space: nowrap;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: var(--gold);
-        opacity: 0.75;
-        padding: 8px 40px;
-        border-top: 1px solid var(--ink-line);
-        background: var(--ink-soft);
+    .content {
+        padding: 40px 40px 36px;
     }
-
-    /* ---------- Content ---------- */
-    .content { padding: 38px 40px 8px; }
 
     .section-title {
-        font-family: 'Fraunces', serif;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--ink);
-        margin: 0 0 14px;
-        letter-spacing: 0.005em;
-    }
-    .section-title.center { text-align: center; }
-
-    .section-eyebrow {
-        display: block;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.64rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin: 0 0 6px;
+        font-family: 'Sora', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--navy);
+        margin: 0 0 12px;
     }
 
     .lead {
         color: var(--text);
-        line-height: 1.75;
+        line-height: 1.7;
         margin: 0 0 10px;
-        font-size: 0.97rem;
+        font-size: 0.98rem;
     }
+
     .lead a {
-        color: var(--ink);
+        color: var(--teal-dark);
         font-weight: 600;
         text-decoration: none;
-        border-bottom: 1.5px solid var(--gold);
+        border-bottom: 1px solid rgba(14,165,160,0.35);
     }
-    .lead a:hover { color: var(--gold); }
+    .lead a:hover { border-bottom-color: var(--teal-dark); }
 
     .divider {
         height: 1px;
-        background: var(--line);
-        margin: 30px 0;
-        position: relative;
-    }
-    .divider::after {
-        content: "◆";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background: var(--paper);
-        color: var(--gold);
-        font-size: 0.6rem;
-        padding: 0 10px;
+        background: var(--border);
+        margin: 28px 0;
     }
 
-    /* ---------- Contact: card-field rows ---------- */
+    /* ---- Contact cards ---- */
     .contact-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 14px;
         margin-top: 18px;
     }
-    .contact-card.full-width { grid-column: 1 / -1; }
+
+    .contact-card.full-width {
+        grid-column: 1 / -1;
+    }
 
     .contact-card {
         display: flex;
         align-items: center;
         gap: 12px;
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-left: 3px solid var(--gold);
-        border-radius: 8px;
-        padding: 13px 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
     }
 
     .contact-icon {
-        width: 34px; height: 34px;
-        border-radius: 6px;
-        background: rgba(176,141,87,0.1);
-        display: flex; align-items: center; justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: rgba(14,165,160,0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex-shrink: 0;
     }
-    .contact-icon svg { width: 16px; height: 16px; stroke: var(--gold); }
+
+    .contact-icon svg { width: 18px; height: 18px; stroke: var(--teal-dark); }
 
     .contact-text .label {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.62rem;
+        font-size: 0.7rem;
         color: var(--muted);
         text-transform: uppercase;
-        letter-spacing: 0.12em;
-        margin: 0 0 3px;
+        letter-spacing: 0.06em;
+        margin: 0 0 2px;
     }
+
     .contact-text a {
-        font-size: 0.9rem;
+        font-size: 0.92rem;
         font-weight: 600;
-        color: var(--ink);
+        color: var(--navy);
         text-decoration: none;
     }
-    .contact-text a:hover { color: var(--gold); }
+    .contact-text a:hover { color: var(--teal-dark); }
 
-    /* ---------- CTA row ---------- */
     .cta-row {
-        margin-top: 26px;
+        margin-top: 30px;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 12px;
     }
-    .cta-link { text-decoration: none; display: inline-block; }
 
-    .phonebook-btn, .call-btn {
+    .cta-link {
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .phonebook-btn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        background: var(--teal);
+        color: #fff;
         text-decoration: none;
-        padding: 11px 24px;
+        padding: 10px 22px;
         border-radius: 30px;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.72rem;
-        font-weight: 600;
-        letter-spacing: 0.1em;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
         text-transform: uppercase;
-        transition: all 0.15s ease;
+        transition: background 0.15s ease;
     }
-    .phonebook-btn {
-        background: transparent;
-        color: var(--ink);
-        border: 1.5px solid var(--gold);
+
+    .phonebook-btn:hover {
+        background: var(--teal-dark);
     }
-    .phonebook-btn:hover { background: var(--gold); color: #fff; }
 
     .call-btn {
-        background: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--navy);
         color: #fff;
-        border: 1.5px solid var(--ink);
+        text-decoration: none;
+        padding: 10px 22px;
+        border-radius: 30px;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        transition: background 0.15s ease;
     }
-    .call-btn:hover { background: var(--gold); border-color: var(--gold); }
 
-    .cta-hint { font-size: 0.85rem; color: var(--muted); margin: 0 0 12px; }
+    .call-btn:hover {
+        background: var(--teal-dark);
+    }
 
-    /* ---------- Hours: ledger ---------- */
-    .hours-grid { margin-top: 16px; }
+    .cta-hint {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0 0 12px;
+    }
+
+    .hours-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 30px;
+        margin-top: 16px;
+    }
+
     .hours-row {
         display: flex;
         justify-content: space-between;
-        align-items: baseline;
-        font-size: 0.9rem;
-        padding: 9px 2px;
-        border-bottom: 1px dashed var(--line);
+        font-size: 0.92rem;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--border);
     }
-    .hours-row strong {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-        font-weight: 500;
-    }
-    .hours-row span {
-        font-family: 'IBM Plex Mono', monospace;
-        color: var(--ink);
-        font-weight: 600;
-        font-size: 0.85rem;
-    }
-    .hours-row .closed { color: #B4483F; }
 
-    /* ---------- Appointment ---------- */
+    .hours-row strong {
+        color: var(--navy);
+        font-weight: 700;
+    }
+
+    .hours-row span {
+        color: var(--text);
+        font-weight: 600;
+    }
+
+    .hours-row .closed {
+        color: #E53E3E;
+    }
+
     .appt-box {
         max-width: 340px;
         margin: 18px auto 0;
@@ -391,53 +350,65 @@
         flex-direction: column;
         gap: 12px;
     }
+
     .appt-date {
         width: 100%;
         padding: 12px 16px;
-        border: 1.5px solid var(--line);
-        border-radius: 8px;
-        background: var(--card);
-        color: var(--text);
-        font-family: 'IBM Plex Mono', monospace;
-        font-weight: 500;
-        font-size: 0.88rem;
+        border: none;
+        border-radius: 10px;
+        background: var(--teal);
+        color: #fff;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
     }
-    .appt-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .appt-slots {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
     .slot-btn {
-        padding: 13px 10px;
-        border-radius: 8px;
-        border: 1.5px solid var(--line);
-        background: var(--card);
+        padding: 14px 10px;
+        border-radius: 10px;
+        border: none;
+        background: var(--bg);
         color: var(--text);
-        font-family: 'IBM Plex Mono', monospace;
-        font-weight: 600;
-        font-size: 0.82rem;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
         cursor: pointer;
-        transition: all 0.15s ease;
+        transition: background 0.15s ease, color 0.15s ease;
     }
-    .slot-btn.selected { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+    .slot-btn.selected {
+        background: var(--teal);
+        color: #fff;
+    }
 
     .appt-submit {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        background: var(--gold);
+        background: var(--teal);
         color: #fff;
         border: none;
         padding: 13px;
-        border-radius: 8px;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.76rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        border-radius: 10px;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
         cursor: pointer;
         transition: background 0.15s ease;
     }
-    .appt-submit:hover { background: var(--ink); }
 
-    /* ---------- Enquiry ---------- */
+    .appt-submit:hover {
+        background: var(--teal-dark);
+    }
+
     .enquiry-box {
         max-width: 420px;
         margin: 18px auto 0;
@@ -445,132 +416,172 @@
         flex-direction: column;
         gap: 12px;
     }
+
     .enquiry-input {
         width: 100%;
         padding: 13px 16px;
-        border: 1.5px solid var(--line);
-        border-radius: 8px;
-        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #fff;
         font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
+        font-size: 0.92rem;
         color: var(--text);
     }
-    .enquiry-input:focus { outline: none; border-color: var(--gold); }
-    .enquiry-textarea { resize: vertical; font-family: 'Inter', sans-serif; }
+
+    .enquiry-input:focus {
+        outline: none;
+        border-color: var(--teal);
+    }
+
+    .enquiry-textarea {
+        resize: vertical;
+        font-family: 'Inter', sans-serif;
+    }
 
     button.cta {
-        background: var(--ink);
+        background: var(--navy);
         color: #fff;
-        border: 1.5px solid var(--ink);
+        border: none;
         padding: 13px 34px;
-        border-radius: 30px;
+        border-radius: 8px;
         cursor: pointer;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.76rem;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.9rem;
         font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        transition: all 0.15s ease;
+        letter-spacing: 0.01em;
+        transition: background 0.15s ease, transform 0.15s ease;
     }
-    button.cta:hover { background: var(--gold); border-color: var(--gold); }
-
-    /* focus visibility for accessibility */
-    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-        outline: 2px solid var(--gold);
-        outline-offset: 2px;
+    button.cta:hover {
+        background: var(--teal-dark);
+        transform: translateY(-1px);
     }
 
-    .qr-block { margin-top: 32px; text-align: center; }
-    .qr-hint { font-size: 0.85rem; color: var(--muted); margin: 0 0 14px; }
+    .qr-block {
+        margin-top: 34px;
+        text-align: center;
+    }
+
+    .qr-hint {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0 0 14px;
+    }
+
     .qr-frame {
         display: inline-block;
-        padding: 8px;
+        padding: 6px;
         background: #fff;
-        border: 1.5px solid var(--line);
-        border-radius: 10px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
     }
-    .qr-frame img { display: block; width: 128px; height: 128px; }
 
-    /* ---------- Account details ---------- */
+    .qr-frame img {
+        display: block;
+        width: 130px;
+        height: 130px;
+    }
+
     .account-box {
-        max-width: 440px;
+        max-width: 420px;
         margin: 18px auto 0;
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 16px;
     }
+
     .account-card {
-        background: var(--card);
-        border: 1px solid var(--line);
+        background: var(--bg);
+        border: 1px solid var(--border);
         border-radius: 10px;
-        padding: 18px 20px;
-        position: relative;
+        padding: 16px 18px;
     }
-    .account-card::before {
-        content: "";
-        position: absolute;
-        left: 0; top: 12px; bottom: 12px;
-        width: 3px;
-        background: linear-gradient(180deg, var(--teal), var(--gold));
-        border-radius: 2px;
-    }
+
     .account-title {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--gold);
+        font-family: 'Sora', sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--navy);
         margin: 0 0 12px;
-        text-align: left;
-        padding-left: 8px;
+        text-align: center;
     }
+
     .account-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 0.84rem;
-        padding: 7px 0 7px 8px;
-        border-bottom: 1px dashed var(--line);
-    }
-    .account-row:last-child { border-bottom: none; }
-    .account-row span {
-        color: var(--muted);
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.03em;
-    }
-    .account-row strong {
-        color: var(--ink);
-        font-weight: 600;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.82rem;
+        font-size: 0.85rem;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--border);
     }
 
-    .upi-pay-row { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 14px; padding-left: 8px; }
-    .pay-apps-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .pay-apps { display: flex; gap: 10px; }
+    .account-row:last-child {
+        border-bottom: none;
+    }
+
+    .account-row span {
+        color: var(--muted);
+    }
+
+    .account-row strong {
+        color: var(--text);
+        font-weight: 600;
+    }
+
+    .upi-pay-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 12px;
+    }
+
+    .pay-apps-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .pay-apps {
+        display: flex;
+        gap: 10px;
+    }
+
     .pay-app-icon {
-        width: 48px; height: 48px;
-        border-radius: 10px;
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
         background: #fff;
-        border: 1px solid var(--line);
-        display: flex; align-items: center; justify-content: center;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 4px;
         cursor: pointer;
     }
-    .pay-app-icon img { width: 100%; height: 100%; object-fit: contain; }
-    .click-to-pay {
-        text-align: center;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.68rem;
-        color: var(--muted);
-        display: flex; align-items: center; justify-content: center; gap: 6px;
-        margin-top: 6px;
+
+
+    .pay-app-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
-    /* ---------- Products: spec plates ---------- */
-    .product-slider-wrap { margin-top: 18px; }
+    .click-to-pay {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .product-slider-wrap {
+        margin-top: 18px;
+    }
+
     .product-slider {
         display: flex;
         gap: 16px;
@@ -580,75 +591,81 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
     }
-    .product-slider::-webkit-scrollbar { display: none; }
+    
+    .product-slider::-webkit-scrollbar {
+        display: none;
+    }
 
     .product-slider .product-card {
-        flex: 0 0 76%;
+        flex: 0 0 70%;
         scroll-snap-align: center;
-        background: var(--card);
-        border: 1px solid var(--line);
+        background: var(--bg);
+        border: 1px solid var(--border);
         border-radius: 10px;
-        padding: 16px;
-        text-align: left;
-        position: relative;
+        padding: 14px;
+        text-align: center;
     }
-    .product-slider .product-card::before {
-        content: "ENTRUST · SPEC";
-        display: block;
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.14em;
-        color: var(--gold);
-        margin-bottom: 10px;
-    }
+
     .product-img {
         width: 100%;
         height: auto;
-        max-height: 200px;
+        max-height: 220px;
         object-fit: contain;
         object-position: top;
-        margin-bottom: 6px;
+        margin-bottom: -4px;
     }
+
     .product-name {
-        font-family: 'Fraunces', serif;
-        font-size: 1.05rem;
+        font-size: 1.1rem;
         font-weight: 600;
-        color: var(--ink);
+        color: var(--navy);
         margin: 0;
     }
+
     .product-desc {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.74rem;
+        font-size: 0.85rem;
         color: var(--muted);
-        line-height: 1.65;
-        margin: 10px 0 0;
+        line-height: 1.5;
+        margin: 8px 0 0;
     }
 
-    .slider-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+    .slider-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 10px;
+    }
+
     .slider-dots span {
-        width: 6px; height: 6px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
-        background: var(--line);
+        background: var(--border);
         transition: background 0.2s ease;
     }
-    .slider-dots span.active { background: var(--gold); }
 
-    .content-end { height: 34px; }
+    .slider-dots span.active {
+        background: var(--teal);
+    }
 
     @media (max-width: 600px) {
-        body { padding: 24px 10px; }
+        body { padding: 20px 12px; }
         .badge-header {
-            padding: 32px 24px 28px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 24px 26px;
         }
-        .header-top { flex-direction: column; align-items: center; text-align: center; gap: 22px; }
         .brand { flex-direction: column; }
-        .content { padding: 32px 22px 8px; }
+        .content { padding: 30px 22px; }
         .contact-grid { grid-template-columns: 1fr; }
-        .microtext { padding: 8px 20px; }
+        .hours-grid { grid-template-columns: 1fr; }
     }
 
     @media (min-width: 601px) {
-        .product-slider .product-card { flex: 0 0 280px; }
+        .product-slider .product-card {
+            flex: 0 0 260px;
+        }
     }
 </style>
 </head>
@@ -660,57 +677,49 @@
 
     <div class="container">
 
-        <div class="holo-strip"></div>
-
         <div class="badge-header">
-            <div class="guilloche"></div>
-            <div class="header-top">
-                <div class="brand">
-                    <img src="logo.png" alt="Arsnova Solutions logo" class="logo">
-                    <div class="brand-text">
-                        <p class="eyebrow"><span class="chip"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span> Entrust Authorised Distributor — Tamil Nadu</p>
-                        <h1>ARSNOVA SOLUTIONS</h1>
-                    </div>
+            <div class="brand">
+                <img src="logo.png" alt="Arsnova Solutions logo" class="logo">
+                <div class="brand-text">
+                    <h1>ARSNOVA SOLUTIONS</h1>
+                    <p class="eyebrow">Entrust Authorised Distributor &mdash; Tamil Nadu</p>
+                    
                 </div>
-                <div class="profile-card">
-                    <img src="david.png" alt="David Jayasingh" class="profile-photo">
-                    <div class="profile-info">
-                        <strong>David Jayasingh</strong>
-                        <span>Director · Sales</span>
-                    </div>
+            </div>
+            <div class="profile-card">
+                <img src="david.png" alt="David Jayasingh" class="profile-photo">
+                <div class="profile-info">
+                    <strong>David Jayasingh</strong>
+                    <span>Director / Sales</span>
                 </div>
             </div>
         </div>
 
-        <div class="microtext">ENTRUST SECURE ID SOLUTIONS &nbsp;·&nbsp; AUTHORISED DISTRIBUTOR &nbsp;·&nbsp; COIMBATORE, TAMIL NADU &nbsp;·&nbsp; ENTRUST SECURE ID SOLUTIONS &nbsp;·&nbsp; AUTHORISED DISTRIBUTOR &nbsp;·&nbsp;</div>
-
         <div class="content">
-            <span class="section-eyebrow">Profile</span>
             <h2 class="section-title">About Arsnova Solutions</h2>
             <p class="lead">Arsnova Solutions represents as partner in Tamil Nadu for the leading ID card printer brand Entrust. Entrust offers on-demand secure employee ID cards, membership cards, student IDs, patient IDs, and government-issued ID cards with enhanced design, management, efficiency, and easy operation.</p>
             <p class="lead">For more information, please visit our <a href="https://arsnova.in">About Us</a> page.</p>
 
             <div class="cta-row">
                 <a href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3ADavid%20Jayasingh%0AORG%3AArsnova%20Solutions%0ATITLE%3ADirector%20%2F%20Sales%0ATEL%3A%2B919487152683%0AEMAIL%3Adavid%40arsnova.in%0AEND%3AVCARD" download="David_Jayasingh.vcf" class="phonebook-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
                         <path d="M19 8v6M22 11h-6"/>
                     </svg>
-                    Add to Phonebook
+                    ADD TO PHONEBOOK
                 </a>
 
                 <a href="tel:+919487152683" class="call-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
-                    Call Now
+                    CALL NOW
                 </a>
             </div>
 
             <div class="divider"></div>
 
-            <span class="section-eyebrow">Reach Us</span>
             <h2 class="section-title">Get in Touch</h2>
             <div class="contact-grid">
                 <div class="contact-card">
@@ -720,7 +729,7 @@
                         </svg>
                     </div>
                     <div class="contact-text">
-                        <p class="label">Tel. No.</p>
+                        <p class="label">Call us</p>
                         <a href="tel:+919487152683">+91 94871 52683</a>
                     </div>
                 </div>
@@ -732,7 +741,7 @@
                         </svg>
                     </div>
                     <div class="contact-text">
-                        <p class="label">E-Mail</p>
+                        <p class="label">Email us</p>
                         <a href="mailto:david@arsnova.in">david@arsnova.in</a>
                     </div>
                 </div>
@@ -745,7 +754,7 @@
                         </svg>
                     </div>
                     <div class="contact-text">
-                        <p class="label">Registered Address</p>
+                        <p class="label">Visit Us</p>
                         <a href="https://maps.app.goo.gl/LhURrfRkZ9L5cGsUA?g_st=awb" target="_blank">14, Nachimuthu Layout, 1st Cross KK Pudur, Saibaba Colony, Coimbatore, Tamil Nadu 641038</a>
                     </div>
                 </div>
@@ -753,8 +762,7 @@
 
             <div class="divider"></div>
 
-            <span class="section-eyebrow" style="text-align:center; display:block;">Availability</span>
-            <h2 class="section-title center">Business Hours</h2>
+            <h2 class="section-title" style="text-align:center;">Business Hours</h2>
             <div class="hours-grid">
                 <div class="hours-row"><strong>Monday</strong><span>09:30 – 05:30</span></div>
                 <div class="hours-row"><strong>Tuesday</strong><span>09:30 – 05:30</span></div>
@@ -767,8 +775,7 @@
 
             <div class="divider"></div>
 
-            <span class="section-eyebrow" style="text-align:center; display:block;">Settlement</span>
-            <h2 class="section-title center">Account Details</h2>
+            <h2 class="section-title" style="text-align:center;">Account Details</h2>
 
             <div class="account-box">
                 <div class="account-card">
@@ -787,6 +794,7 @@
                         <div class="qr-frame">
                             <img src="upi-qr.png" alt="UPI QR Code" style="width:130px; height:130px;">
                         </div>
+
                         <div class="pay-apps-col">
                             <div class="pay-apps">
                                 <button type="button" class="pay-app-icon" onclick="openPaymentApp('gpay')">
@@ -797,7 +805,7 @@
                                 </button>
                             </div>
                             <p class="click-to-pay">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
                                     <path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/>
                                 </svg>
                                 Click to Pay
@@ -809,45 +817,45 @@
 
             <div class="divider"></div>
 
-            <span class="section-eyebrow" style="text-align:center; display:block;">Schedule</span>
-            <h2 class="section-title center">Make an Appointment</h2>
+            <h2 class="section-title" style="text-align:center;">Make an Appointment</h2>
 
             <div class="appt-box">
                 <input type="date" id="apptDate" class="appt-date">
+
                 <div class="appt-slots">
-                    <button type="button" class="slot-btn" data-slot="09:00 - 13:00">09:00 – 13:00</button>
-                    <button type="button" class="slot-btn" data-slot="14:00 - 17:00">14:00 – 17:00</button>
+                    <button type="button" class="slot-btn" data-slot="09:00 - 13:00">09:00 - 13:00</button>
+                    <button type="button" class="slot-btn" data-slot="14:00 - 17:00">14:00 - 17:00</button>
                 </div>
+
                 <button type="button" class="appt-submit" onclick="sendAppointment()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
                         <rect x="3" y="4" width="18" height="18" rx="2"/>
                         <path d="M16 2v4M8 2v4M3 10h18"/>
                     </svg>
-                    Make an Appointment
+                    MAKE AN APPOINTMENT
                 </button>
             </div>
 
             <div class="divider"></div>
 
-            <span class="section-eyebrow" style="text-align:center; display:block;">Catalogue</span>
-            <h2 class="section-title center">Our Products</h2>
+            <h2 class="section-title" style="text-align:center;">OUR PRODUCTS</h2>
 
             <div class="product-slider-wrap">
                 <div class="product-slider" id="productSlider">
                     <div class="product-card">
-                        <img src="product1.png" alt="Entrust Sigma DSE ID card printer" class="product-img">
-                        <p class="product-name">Entrust Sigma DSE</p>
-                        <p class="product-desc">Dye-sublimation / resin thermal transfer · 225 CPH · 300×600, 300×1200 DPI · USB, Ethernet &amp; Wi-Fi (optional)</p>
+                        <img src="product1.png" alt="Product name" class="product-img">
+                        <p class="product-name">ENTRUST DATACARD SIGMA DSE  </p>
+                        <p class="product-desc">Dye-Sublimation / Resin Thermal Transfer Technology Improvement of Print Speed - 225 CPH Print Resolution 300 x 600, 300 x 1200 Connectivity USB, Ethenet & Wifi (Option).</p>
                     </div>
                     <div class="product-card">
-                        <img src="product2.png" alt="Entrust Sigma DS3 ID card printer" class="product-img">
-                        <p class="product-name">Entrust Sigma DS3</p>
-                        <p class="product-desc">First 600 DPI printer · dye-sublimation / resin thermal transfer · 225 CPH · 600×600, 300×1200 DPI · USB, Ethernet &amp; Wi-Fi (optional)</p>
+                        <img src="product2.png" alt="Product name" class="product-img">
+                        <p class="product-name">ENTRUST DATACRD SIGMA DS3</p>
+                        <p class="product-desc">The First 600 DPI PRINTER Dye-Sublimation / Resin Thermal Transfer Technology Improvement of Print Speed - 225 CPH Print Resolution 600 x 600, 300 x 1200 Connectivity USB, Ethenet & Wifi (Option).</p>
                     </div>
                     <div class="product-card">
-                        <img src="product3.png" alt="Entrust Artista CR805 ID card printer" class="product-img">
-                        <p class="product-name">Entrust Artista CR805</p>
-                        <p class="product-desc">Retransfer pigment ink · 225 CPH · 600×600, 300×1200 DPI · USB, Ethernet &amp; Wi-Fi · lamination and tactile unit optional</p>
+                        <img src="product3.png" alt="Product name" class="product-img">
+                        <p class="product-name">ENTRUST DATACRD ARTISTA CR805</p>
+                        <p class="product-desc">Retransfer pigment ink Improvement of Print Speed - 225 CPH Print Resolution 600 x 600, 300 x 1200 Connectivity USB, Ethenet & Wifi Lamination and Tactile Unit Optional(Option).</p>
                     </div>
                 </div>
                 <div class="slider-dots" id="sliderDots"></div>
@@ -855,19 +863,19 @@
 
             <div class="divider"></div>
 
-            <span class="section-eyebrow" style="text-align:center; display:block;">Get a Quote</span>
-            <h2 class="section-title center">Enquiry Form</h2>
+            <h2 class="section-title" style="text-align:center;">Enquiry Form</h2>
 
             <div class="enquiry-box">
                 <input type="text" id="enqName" class="enquiry-input" placeholder="Name">
                 <input type="email" id="enqEmail" class="enquiry-input" placeholder="Email Address">
                 <input type="tel" id="enqPhone" class="enquiry-input" placeholder="Phone Number">
                 <textarea id="enqMessage" class="enquiry-input enquiry-textarea" placeholder="Message" rows="3"></textarea>
-                <button type="button" class="appt-submit" onclick="sendEnquiry()">Send Enquiry</button>
+
+                <button type="button" class="appt-submit" onclick="sendEnquiry()">SEND ENQUIRY</button>
             </div>
 
             <div class="cta-row">
-                <p class="cta-hint">Explore our full range of ID card printers and solutions</p>
+                <p class="cta-hint">Explore our full range of ID card printers and Solutions</p>
                 <button class="cta" onclick="window.location.href='https://arsnova.in'">Visit Our Website</button>
             </div>
 
@@ -877,12 +885,7 @@
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://arsnova.in" alt="QR Code to Arsnova Solutions website">
                 </div>
             </div>
-
-            <div class="content-end"></div>
         </div>
-
-        <div class="microtext">ENTRUST SECURE ID SOLUTIONS &nbsp;·&nbsp; AUTHORISED DISTRIBUTOR &nbsp;·&nbsp; COIMBATORE, TAMIL NADU &nbsp;·&nbsp; ENTRUST SECURE ID SOLUTIONS &nbsp;·&nbsp; AUTHORISED DISTRIBUTOR &nbsp;·&nbsp;</div>
-        <div class="holo-strip"></div>
 
     </div>
 
@@ -899,8 +902,14 @@
 
         function sendAppointment() {
             const date = document.getElementById('apptDate').value;
-            if (!date) { alert('Please select a date.'); return; }
-            if (!selectedSlot) { alert('Please select a time slot.'); return; }
+            if (!date) {
+                alert('Please select a date.');
+                return;
+            }
+            if (!selectedSlot) {
+                alert('Please select a time slot.');
+                return;
+            }
             const message = `Hi, I would like to book an appointment on ${date} between ${selectedSlot}.`;
             const phoneNumber = '919487152683';
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
@@ -913,7 +922,10 @@
             const phone = document.getElementById('enqPhone').value.trim();
             const msg = document.getElementById('enqMessage').value.trim();
 
-            if (!name || !phone) { alert('Please enter at least your name and phone number.'); return; }
+            if (!name || !phone) {
+                alert('Please enter at least your name and phone number.');
+                return;
+            }
 
             const message = `Enquiry from website:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${msg}`;
             const phoneNumber = '919487152683';
@@ -937,7 +949,12 @@
             }
 
             let appOpened = false;
-            function handleVisibilityChange() { if (document.hidden) { appOpened = true; } }
+
+            function handleVisibilityChange() {
+                if (document.hidden) {
+                    appOpened = true;
+                }
+            }
 
             document.addEventListener('visibilitychange', handleVisibilityChange);
             window.addEventListener('blur', handleVisibilityChange);
@@ -947,6 +964,7 @@
             setTimeout(function () {
                 document.removeEventListener('visibilitychange', handleVisibilityChange);
                 window.removeEventListener('blur', handleVisibilityChange);
+
                 if (!appOpened) {
                     if (confirm(`${appName} is not installed. Would you like to install it now?`)) {
                         window.location.href = playStoreLink;
