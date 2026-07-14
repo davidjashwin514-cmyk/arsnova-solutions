@@ -77,9 +77,10 @@
     }
 
     .badge-header {
-        background: linear-gradient(135deg, var(--navy) 0%, var(--purple) 40%, var(--teal) 100%);
-        background-size: 200% 200%;
-        animation: gradientShift 10s ease infinite;
+        background: linear-gradient(45deg, #0B2545 0%, #5B21B6 30%, #0EA5A0 60%, #8B5CF6 100%);
+        background-size: 400% 400%;
+        background-repeat: no-repeat;
+        animation: gradientShift 10s ease infinite alternate;
         padding: 36px 40px 28px;
         display: flex;
         align-items: center;
@@ -102,15 +103,9 @@
     }
 
     @keyframes gradientShift {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 
     .brand {
