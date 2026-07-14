@@ -606,6 +606,34 @@
         text-align: center;
     }
 
+    .scrolling-announcements {
+        position: relative;
+        overflow: hidden;
+        background: rgba(14,165,160,0.08);
+        border: 1px solid rgba(14,165,160,0.22);
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin: 24px 0;
+    }
+
+    .ticker {
+        display: inline-flex;
+        gap: 48px;
+        white-space: nowrap;
+        animation: scrollText 18s linear infinite;
+    }
+
+    .ticker span {
+        font-weight: 700;
+        color: var(--navy);
+        font-size: 0.95rem;
+    }
+
+    @keyframes scrollText {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+
     .product-img {
         width: 100%;
         height: auto;
@@ -837,6 +865,14 @@
             </div>
 
             <div class="divider"></div>
+
+            <div class="scrolling-announcements">
+                <div class="ticker">
+                    <span>Secure ID card printing solutions for schools, businesses, and governments</span>
+                    <span>Fast delivery across Tamil Nadu</span>
+                    <span>Entrust authorized distributor</span>
+                </div>
+            </div>
 
             <h2 class="section-title" style="text-align:center;">OUR PRODUCTS</h2>
 
