@@ -82,6 +82,23 @@
         border: 1px solid rgba(255,255,255,0.35);
         box-shadow: var(--shadow);
         backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    .container.revealed {
+        animation: revealContent 0.8s ease forwards;
+    }
+
+    @keyframes revealContent {
+        0% {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .badge-header {
@@ -1085,7 +1102,13 @@
         });
 
         window.addEventListener('load', function () {
-            document.getElementById('loader').classList.add('hidden');
+            const loader = document.getElementById('loader');
+            const container = document.querySelector('.container');
+
+            loader.classList.add('hidden');
+            if (container) {
+                container.classList.add('revealed');
+            }
         });
     </script>
 
