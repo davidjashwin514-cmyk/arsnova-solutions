@@ -1075,17 +1075,17 @@
             }
             const message = `Appointment Request:\nDate: ${date}\nPreferred Time: ${selectedSlot}`;
 
+            window.open(`https://wa.me/919487152683?text=${encodeURIComponent(message)}`, '_blank');
+
             emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
                 name: 'Appointment Request',
                 phone: 'Not provided',
                 message: message
             }).then(() => {
-                alert('Thank you! Your appointment request has been sent.');
                 document.getElementById('apptDate').value = '';
                 selectedSlot = null;
                 document.querySelectorAll('.slot-btn').forEach(btn => btn.classList.remove('selected'));
             }).catch((err) => {
-                alert('Something went wrong. Please try again or call us directly.');
                 console.error(err);
             });
         }
@@ -1103,18 +1103,18 @@
 
             const message = `Enquiry from website:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${msg}`;
 
+            window.open(`https://wa.me/919487152683?text=${encodeURIComponent(message)}`, '_blank');
+
             emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
                 name: name,
                 phone: phone,
                 message: message
             }).then(() => {
-                alert('Thank you! Your enquiry has been sent.');
                 document.getElementById('enqName').value = '';
                 document.getElementById('enqEmail').value = '';
                 document.getElementById('enqPhone').value = '';
                 document.getElementById('enqMessage').value = '';
             }).catch((err) => {
-                alert('Something went wrong. Please try again or call us directly.');
                 console.error(err);
             });
         }
@@ -1133,19 +1133,19 @@
 
             const message = `Service/Repair Request:\nName: ${name}\nPhone: ${phone}\nPrinter Model: ${model}\nIssue: ${issue}\nPreferred Date: ${date || 'Not specified'}`;
 
+            window.open(`https://wa.me/919487152683?text=${encodeURIComponent(message)}`, '_blank');
+
             emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
                 name: name,
                 phone: phone,
                 message: message
             }).then(() => {
-                alert('Thank you! Your service request has been sent.');
                 document.getElementById('svcName').value = '';
                 document.getElementById('svcPhone').value = '';
                 document.getElementById('svcModel').value = '';
                 document.getElementById('svcIssue').value = '';
                 document.getElementById('svcDate').value = '';
             }).catch((err) => {
-                alert('Something went wrong. Please try again or call us directly.');
                 console.error(err);
             });
         }
@@ -1165,12 +1165,13 @@
 
             const message = `Order Request:\nName: ${name}\nPhone: ${phone}\nItem Type: ${type}\nItem: ${item}\nQuantity: ${qty}\nNotes: ${notes || 'None'}`;
 
+            window.open(`https://wa.me/919487152683?text=${encodeURIComponent(message)}`, '_blank');
+
             emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
                 name: name,
                 phone: phone,
                 message: message
             }).then(() => {
-                alert('Thank you! Your order request has been sent.');
                 document.getElementById('ordName').value = '';
                 document.getElementById('ordPhone').value = '';
                 document.getElementById('ordType').value = '';
@@ -1178,7 +1179,6 @@
                 document.getElementById('ordQty').value = '';
                 document.getElementById('ordNotes').value = '';
             }).catch((err) => {
-                alert('Something went wrong. Please try again or call us directly.');
                 console.error(err);
             });
         }
