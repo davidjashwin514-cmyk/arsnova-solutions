@@ -8,6 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+    emailjs.init({ publicKey: "yaVE6RbD-6rAtFEdJ" });
+</script>
 <style>
     :root {
         --navy: #0B2545;
@@ -1069,10 +1073,21 @@
                 alert('Please select a time slot.');
                 return;
             }
-            const message = `Hi, I would like to book an appointment on ${date} between ${selectedSlot}.`;
-            const phoneNumber = '919487152683';
-            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+            const message = `Appointment Request:\nDate: ${date}\nPreferred Time: ${selectedSlot}`;
+
+            emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
+                name: 'Appointment Request',
+                phone: 'Not provided',
+                message: message
+            }).then(() => {
+                alert('Thank you! Your appointment request has been sent.');
+                document.getElementById('apptDate').value = '';
+                selectedSlot = null;
+                document.querySelectorAll('.slot-btn').forEach(btn => btn.classList.remove('selected'));
+            }).catch((err) => {
+                alert('Something went wrong. Please try again or call us directly.');
+                console.error(err);
+            });
         }
 
         function sendEnquiry() {
@@ -1087,9 +1102,21 @@
             }
 
             const message = `Enquiry from website:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${msg}`;
-            const phoneNumber = '919487152683';
-            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+
+            emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
+                name: name,
+                phone: phone,
+                message: message
+            }).then(() => {
+                alert('Thank you! Your enquiry has been sent.');
+                document.getElementById('enqName').value = '';
+                document.getElementById('enqEmail').value = '';
+                document.getElementById('enqPhone').value = '';
+                document.getElementById('enqMessage').value = '';
+            }).catch((err) => {
+                alert('Something went wrong. Please try again or call us directly.');
+                console.error(err);
+            });
         }
 
         function sendServiceRequest() {
@@ -1105,9 +1132,22 @@
             }
 
             const message = `Service/Repair Request:\nName: ${name}\nPhone: ${phone}\nPrinter Model: ${model}\nIssue: ${issue}\nPreferred Date: ${date || 'Not specified'}`;
-            const phoneNumber = '919487152683';
-            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+
+            emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
+                name: name,
+                phone: phone,
+                message: message
+            }).then(() => {
+                alert('Thank you! Your service request has been sent.');
+                document.getElementById('svcName').value = '';
+                document.getElementById('svcPhone').value = '';
+                document.getElementById('svcModel').value = '';
+                document.getElementById('svcIssue').value = '';
+                document.getElementById('svcDate').value = '';
+            }).catch((err) => {
+                alert('Something went wrong. Please try again or call us directly.');
+                console.error(err);
+            });
         }
 
         function sendOrderRequest() {
@@ -1124,9 +1164,23 @@
             }
 
             const message = `Order Request:\nName: ${name}\nPhone: ${phone}\nItem Type: ${type}\nItem: ${item}\nQuantity: ${qty}\nNotes: ${notes || 'None'}`;
-            const phoneNumber = '919487152683';
-            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+
+            emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
+                name: name,
+                phone: phone,
+                message: message
+            }).then(() => {
+                alert('Thank you! Your order request has been sent.');
+                document.getElementById('ordName').value = '';
+                document.getElementById('ordPhone').value = '';
+                document.getElementById('ordType').value = '';
+                document.getElementById('ordItem').value = '';
+                document.getElementById('ordQty').value = '';
+                document.getElementById('ordNotes').value = '';
+            }).catch((err) => {
+                alert('Something went wrong. Please try again or call us directly.');
+                console.error(err);
+            });
         }
 
         function openPaymentApp(app) {
