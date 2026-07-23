@@ -936,6 +936,25 @@
 
             <div class="divider"></div>
 
+            <h2 class="section-title" style="text-align:center;">Book a Service / Repair</h2>
+
+            <div class="enquiry-box">
+                <input type="text" id="svcName" class="enquiry-input" placeholder="Your Name">
+                <input type="tel" id="svcPhone" class="enquiry-input" placeholder="Phone Number">
+                <input type="text" id="svcModel" class="enquiry-input" placeholder="Printer Model (e.g. Sigma DS3)">
+                <textarea id="svcIssue" class="enquiry-input enquiry-textarea" placeholder="Describe the issue" rows="3"></textarea>
+                <input type="date" id="svcDate" class="appt-date">
+
+                <button type="button" class="appt-submit" onclick="sendServiceRequest()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                    BOOK SERVICE
+                </button>
+            </div>
+
+            <div class="divider"></div>
+
             <div class="scrolling-announcements">
                 <div class="ticker">
                     <span>Secure ID card printing solutions for schools, businesses, and governments</span>
@@ -1039,6 +1058,24 @@
             }
 
             const message = `Enquiry from website:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${msg}`;
+            const phoneNumber = '919487152683';
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function sendServiceRequest() {
+            const name = document.getElementById('svcName').value.trim();
+            const phone = document.getElementById('svcPhone').value.trim();
+            const model = document.getElementById('svcModel').value.trim();
+            const issue = document.getElementById('svcIssue').value.trim();
+            const date = document.getElementById('svcDate').value;
+
+            if (!name || !phone || !model) {
+                alert('Please fill in your name, phone number, and printer model.');
+                return;
+            }
+
+            const message = `Service/Repair Request:\nName: ${name}\nPhone: ${phone}\nPrinter Model: ${model}\nIssue: ${issue}\nPreferred Date: ${date || 'Not specified'}`;
             const phoneNumber = '919487152683';
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
