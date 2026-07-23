@@ -1075,7 +1075,7 @@
             }
             const message = `Appointment Request:\nDate: ${date}\nPreferred Time: ${selectedSlot}`;
 
-            window.open(`https://wa.me/919487152683?text=${encodeURIComponent(message)}`, '_blank');
+            window.location.href = `https://wa.me/919487152683?text=${encodeURIComponent(message)}`;
 
             emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
                 name: 'Appointment Request',
@@ -1103,7 +1103,7 @@
 
             const message = `Enquiry from website:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${msg}`;
 
-            window.open(`https://wa.me/919487152683?text=${encodeURIComponent(message)}`, '_blank');
+            window.location.href = `https://wa.me/919487152683?text=${encodeURIComponent(message)}`;
 
             emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
                 name: name,
@@ -1133,7 +1133,7 @@
 
             const message = `Service/Repair Request:\nName: ${name}\nPhone: ${phone}\nPrinter Model: ${model}\nIssue: ${issue}\nPreferred Date: ${date || 'Not specified'}`;
 
-            window.open(`https://wa.me/919487152683?text=${encodeURIComponent(message)}`, '_blank');
+            window.location.href = `https://wa.me/919487152683?text=${encodeURIComponent(message)}`;
 
             emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
                 name: name,
@@ -1165,7 +1165,7 @@
 
             const message = `Order Request:\nName: ${name}\nPhone: ${phone}\nItem Type: ${type}\nItem: ${item}\nQuantity: ${qty}\nNotes: ${notes || 'None'}`;
 
-            window.open(`https://wa.me/919487152683?text=${encodeURIComponent(message)}`, '_blank');
+            window.location.href = `https://wa.me/919487152683?text=${encodeURIComponent(message)}`;
 
             emailjs.send('service_t2e8ec3', 'template_s9dnqst', {
                 name: name,
