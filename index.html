@@ -955,6 +955,35 @@
 
             <div class="divider"></div>
 
+            <h2 class="section-title" style="text-align:center;">Order Printer / Ribbon / Card</h2>
+
+            <div class="enquiry-box">
+                <input type="text" id="ordName" class="enquiry-input" placeholder="Your Name">
+                <input type="tel" id="ordPhone" class="enquiry-input" placeholder="Phone Number">
+
+                <select id="ordType" class="enquiry-input">
+                    <option value="" disabled selected>Select Item Type</option>
+                    <option value="Printer">Printer</option>
+                    <option value="Ribbon">Ribbon</option>
+                    <option value="Card">Card</option>
+                </select>
+
+                <input type="text" id="ordItem" class="enquiry-input" placeholder="Item Name / Model (e.g. Sigma DS3, YMCKO Ribbon)">
+                <input type="number" id="ordQty" class="enquiry-input" placeholder="Quantity" min="1">
+                <textarea id="ordNotes" class="enquiry-input enquiry-textarea" placeholder="Any additional notes (optional)" rows="2"></textarea>
+
+                <button type="button" class="appt-submit" onclick="sendOrderRequest()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    PLACE ORDER
+                </button>
+            </div>
+
+            <div class="divider"></div>
+
             <div class="scrolling-announcements">
                 <div class="ticker">
                     <span>Secure ID card printing solutions for schools, businesses, and governments</span>
@@ -1076,6 +1105,25 @@
             }
 
             const message = `Service/Repair Request:\nName: ${name}\nPhone: ${phone}\nPrinter Model: ${model}\nIssue: ${issue}\nPreferred Date: ${date || 'Not specified'}`;
+            const phoneNumber = '919487152683';
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function sendOrderRequest() {
+            const name = document.getElementById('ordName').value.trim();
+            const phone = document.getElementById('ordPhone').value.trim();
+            const type = document.getElementById('ordType').value;
+            const item = document.getElementById('ordItem').value.trim();
+            const qty = document.getElementById('ordQty').value;
+            const notes = document.getElementById('ordNotes').value.trim();
+
+            if (!name || !phone || !type || !item || !qty) {
+                alert('Please fill in your name, phone, item type, item name, and quantity.');
+                return;
+            }
+
+            const message = `Order Request:\nName: ${name}\nPhone: ${phone}\nItem Type: ${type}\nItem: ${item}\nQuantity: ${qty}\nNotes: ${notes || 'None'}`;
             const phoneNumber = '919487152683';
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
