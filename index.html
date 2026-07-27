@@ -61,6 +61,42 @@
         visibility: hidden;
     }
 
+    .blinds-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .blind {
+        background: linear-gradient(180deg, #0d0f16 0%, #1a1d28 100%);
+        transform: translateY(-110%);
+        opacity: 0.98;
+    }
+
+    .blinds-overlay.show .blind {
+        animation: blindDrop 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation-delay: calc(var(--i, 0) * 0.05s);
+    }
+
+    .blinds-overlay.hide .blind {
+        animation: blindRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation-delay: calc(var(--i, 0) * 0.03s);
+    }
+
+    @keyframes blindDrop {
+        0% { transform: translateY(-110%); }
+        100% { transform: translateY(0); }
+    }
+
+    @keyframes blindRise {
+        0% { transform: translateY(0); opacity: 0.98; }
+        100% { transform: translateY(110%); opacity: 0; }
+    }
+
     .loader-spinner {
         width: 60px;
         height: 60px;
@@ -798,6 +834,21 @@
         <div class="loader-spinner"></div>
     </div>
 
+    <div id="blindsOverlay" class="blinds-overlay" aria-hidden="true">
+        <span class="blind" style="--i:0"></span>
+        <span class="blind" style="--i:1"></span>
+        <span class="blind" style="--i:2"></span>
+        <span class="blind" style="--i:3"></span>
+        <span class="blind" style="--i:4"></span>
+        <span class="blind" style="--i:5"></span>
+        <span class="blind" style="--i:6"></span>
+        <span class="blind" style="--i:7"></span>
+        <span class="blind" style="--i:8"></span>
+        <span class="blind" style="--i:9"></span>
+        <span class="blind" style="--i:10"></span>
+        <span class="blind" style="--i:11"></span>
+    </div>
+
     <div class="container">
         <span class="crop crop-tl"></span>
         <span class="crop crop-tr"></span>
@@ -1305,9 +1356,23 @@
         window.addEventListener('load', function () {
             const loader = document.getElementById('loader');
             const container = document.querySelector('.container');
+            const blindsOverlay = document.getElementById('blindsOverlay');
 
             loader.classList.add('hidden');
-            if (container) {
+
+            if (blindsOverlay) {
+                blindsOverlay.classList.add('show');
+                setTimeout(() => {
+                    if (container) {
+                        container.classList.add('revealed');
+                    }
+                    blindsOverlay.classList.remove('show');
+                    blindsOverlay.classList.add('hide');
+                    setTimeout(() => {
+                        blindsOverlay.style.display = 'none';
+                    }, 700);
+                }, 900);
+            } else if (container) {
                 container.classList.add('revealed');
             }
         });
