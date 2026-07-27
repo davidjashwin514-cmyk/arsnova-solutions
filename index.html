@@ -64,37 +64,33 @@
     .blinds-overlay {
         position: fixed;
         inset: 0;
-        z-index: 10000;
+        z-index: 9998;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         pointer-events: none;
         overflow: hidden;
     }
 
-    .blind {
-        background: linear-gradient(180deg, #0d0f16 0%, #1a1d28 100%);
-        transform: translateY(-110%);
-        opacity: 0.98;
+    .blinds-overlay.active {
+        z-index: 10000;
     }
 
-    .blinds-overlay.show .blind {
-        animation: blindDrop 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    .blind {
+        background: var(--ink);
+        transform: scaleX(1);
+    }
+
+    .blind:nth-child(odd)  { transform-origin: left; }
+    .blind:nth-child(even) { transform-origin: right; }
+
+    .blinds-overlay.hide .blind {
+        animation: blindShrink 0.6s ease forwards;
         animation-delay: calc(var(--i, 0) * 0.05s);
     }
 
-    .blinds-overlay.hide .blind {
-        animation: blindRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        animation-delay: calc(var(--i, 0) * 0.03s);
-    }
-
-    @keyframes blindDrop {
-        0% { transform: translateY(-110%); }
-        100% { transform: translateY(0); }
-    }
-
-    @keyframes blindRise {
-        0% { transform: translateY(0); opacity: 0.98; }
-        100% { transform: translateY(110%); opacity: 0; }
+    @keyframes blindShrink {
+        0%   { transform: scaleX(1); }
+        100% { transform: scaleX(0); }
     }
 
     .loader-spinner {
@@ -1360,21 +1356,18 @@
 
             loader.classList.add('hidden');
 
-            if (blindsOverlay) {
-                blindsOverlay.classList.add('show');
-                setTimeout(() => {
-                    if (container) {
-                        container.classList.add('revealed');
-                    }
-                    blindsOverlay.classList.remove('show');
+            if (container) {
+                container.classList.add('revealed');
+            }
+
+            setTimeout(() => {
+                if (blindsOverlay) {
                     blindsOverlay.classList.add('hide');
                     setTimeout(() => {
                         blindsOverlay.style.display = 'none';
-                    }, 700);
-                }, 900);
-            } else if (container) {
-                container.classList.add('revealed');
-            }
+                    }, 900);
+                }
+            }, 200);
         });
     </script>
 
