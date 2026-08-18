@@ -802,6 +802,73 @@
         background: var(--gold);
     }
 
+    /* ---- Our Clients ---- */
+    .clients-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 14px;
+        margin-top: 18px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .clients-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .client-item {
+        background: var(--paper-soft);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 140px;
+        scroll-snap-align: start;
+    }
+
+    .client-photo-wrap {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 6px;
+        background: #fff;
+    }
+
+    .client-photo-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* Curtain sits over the photo and shrinks away left-anchored,
+       so the uncovered area grows from the right edge toward the left —
+       a right-to-left "loading in" reveal. */
+    .client-photo-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: var(--ink);
+        background-image: linear-gradient(90deg, transparent, rgba(232,179,104,0.4), transparent);
+        transform-origin: left;
+        transform: scaleX(1);
+        transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    .client-photo-wrap.revealed::after {
+        transform: scaleX(0);
+    }
+
+    @media (max-width: 600px) {
+        .clients-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     @media (max-width: 600px) {
         body { padding: 20px 12px; }
         .badge-header {
@@ -1157,6 +1224,43 @@
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://arsnova.in" alt="QR Code to Arsnova Solutions website">
                 </div>
             </div>
+
+            <div class="divider"></div>
+
+            <h2 class="section-title" style="text-align:center;">Our Clients</h2>
+
+            <div class="clients-grid" id="clientsGrid">
+                <div class="client-item">
+                    <div class="client-photo-wrap">
+                        <img src="client1.png" alt="Client 1">
+                    </div>
+                </div>
+                <div class="client-item">
+                    <div class="client-photo-wrap">
+                        <img src="client2.png" alt="Client 2">
+                    </div>
+                </div>
+                <div class="client-item">
+                    <div class="client-photo-wrap">
+                        <img src="client3.png" alt="Client 3">
+                    </div>
+                </div>
+                <div class="client-item">
+                    <div class="client-photo-wrap">
+                        <img src="client4.png" alt="Client 4">
+                    </div>
+                </div>
+                <div class="client-item">
+                    <div class="client-photo-wrap">
+                        <img src="client5.png" alt="Client 5">
+                    </div>
+                </div>
+                <div class="client-item">
+                    <div class="client-photo-wrap">
+                        <img src="client6.png" alt="Client 6">
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -1348,6 +1452,31 @@
             const index = Math.round(slider.scrollLeft / cards[0].offsetWidth);
             dots.forEach((d, i) => d.classList.toggle('active', i === index));
         });
+
+        // Our Clients — right-to-left reveal, triggered as each photo scrolls into view,
+        // staggered slightly so a row unveils left-to-right in sequence.
+        (function () {
+            const wraps = Array.from(document.querySelectorAll('.client-photo-wrap'));
+            if (!wraps.length) return;
+
+            if (!('IntersectionObserver' in window)) {
+                wraps.forEach(w => w.classList.add('revealed'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const wrap = entry.target;
+                        const index = wraps.indexOf(wrap);
+                        setTimeout(() => wrap.classList.add('revealed'), index * 140);
+                        obs.unobserve(wrap);
+                    }
+                });
+            }, { threshold: 0.35 });
+
+            wraps.forEach(w => observer.observe(w));
+        })();
 
         window.addEventListener('load', function () {
             const loader = document.getElementById('loader');
